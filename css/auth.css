@@ -1,0 +1,94 @@
+/* css/auth.css */
+
+/* Centrado perfecto en la pantalla con un fondo suave */
+body.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Gris claro de Bootstrap */
+}
+
+/* Contenedor principal del formulario */
+.auth-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px; /* Ancho ideal para que no se deforme en PC */
+    border: none;
+}
+
+/* Título de la marca */
+.auth-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #212529;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+/* Estilo para los inputs de Bootstrap enfocados */
+.auth-card .form-control {
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #dee2e6;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.auth-card .form-control:focus {
+    border-color: #212529;
+    box-shadow: 0 0 0 3px rgba(33, 37, 41, 0.1);
+    color: #212529;
+}
+
+/* Botones principales de acción */
+.btn-auth-submit {
+    border-radius: 8px;
+    padding: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease;
+}
+
+/* Separador elegante para el botón de invitado */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.auth-divider:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.auth-divider:not(:empty)::after {
+    margin-left: .5em;
+}
+
+/* Links secundarios (Crear cuenta / Iniciar sesión) */
+.auth-link {
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #212529;
+    text-decoration: underline;
+}

@@ -1,0 +1,48 @@
+
+/*  Comportamiento del carrito con offcanvas-end */
+.offcanvas-end {
+    width: 100% !important;
+}
+
+/* 2. En pantallas medianas ocupa aproximadamente el 50% de la pantalla */
+@media (min-width: 576px) {
+    .offcanvas-end {
+        width: 50% !important;
+    }
+}
+
+/* 3. En pantallas grandes: Le damos un ancho fijo ideal de vista previa */
+@media (min-width: 992px) {
+    .offcanvas-end {
+        width: 400px !important; /* Un tamaño estándar perfecto para e-commerce */
+    }
+}
+/* Limita el ancho del buscador para que no se estire de más */
+.input-group {
+    max-width: 220px;
+}
+
+/* Efecto suave para los links de navegación */
+.nav-link {
+    transition: color 0.2s ease-in-out;
+}
+.nav-link:hover {
+    color: #6c757d !important; /* Gris intermedio al pasar el mouse */
+}
+
+/* Limita los títulos largos a máximo 2 líneas y pone puntos suspensivos (...) */
+.text-truncate-2 {
+    display: -webkit-box;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* Efecto visual sutil al pasar el mouse por encima de la tarjeta */
+.producto-tarjeta {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.producto-tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}

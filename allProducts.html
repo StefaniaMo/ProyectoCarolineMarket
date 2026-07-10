@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Caroline Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+    <header class="container-fluid py-2 bg-white border-bottom shadow-sm">
+        <div class="d-flex justify-content-between align-items-center py-1 container">
+            <div class="header-links" id="contenedor-auth-header">
+                <a href="registro.html" class="text-secondary text-decoration-none small me-2">Crear cuenta</a>
+                <span class="text-muted small">|</span>
+                <a href="login.html" class="text-secondary text-decoration-none small ms-2">Iniciar sesión</a>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm" style="max-width: 250px;">
+                    <span class="input-group-text bg-transparent border-end-0" id="buscar-icono">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto..." aria-label="Buscar">
+                </div>
+                <button id="btn-carrito" class="btn btn-outline-dark position-relative border-0 p-1" data-bs-toggle="offcanvas" data-bs-target="#carritoDesplegable" aria-controls="carritoDesplegable">
+                    <i class="bi bi-cart3 fs-4"></i>
+                    <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </button>
+            </div>
+        </div>
+
+        <hr class="my-2 text-muted">
+        
+        <nav class="d-flex justify-content-center py-1">
+            <ul class="nav gap-4 justify-content-center fw-medium text-uppercase small">
+                <li class="nav-item">
+                    <a class="nav-link text-dark p-0" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-dark p-0 dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Productos
+                    </a>
+                    <ul class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="./allProducts.html" data-categoria="todos">Todas las categorías</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="./allProducts.html?categoria=men's clothing" data-categoria="men's clothing">Ropa Masculina</a></li>
+                        <li><a class="dropdown-item" href="allProducts.html?categoria=women's clothing" data-categoria="women's clothing">Ropa Femenina</a></li>
+                        <li><a class="dropdown-item" href="allProducts.html?categoria=electronics" data-categoria="electronics">Electrónica</a></li>
+                        <li><a class="dropdown-item" href="allProducts.html?categoria=jewelery" data-categoria="jewelery">Joyería</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark p-0" href="#">Quiénes Somos</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb fs-5 mb-0" id="dinamico-breadcrumb">
+                        </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <main class="col-12">
+                <div id="contenedor-productos" class="row row-cols-1 row-cols-md-3 g-4">
+                    </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoDesplegable" aria-labelledby="carritoDesplegableLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="carritoDesplegableLabel">Tu Carrito</h5>
+            <button type="button" class="btn-close" data-bs-toggle="offcanvas" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body" id="carrito-items-vista">
+            </div>
+
+        <div class="offcanvas-footer p-3 border-top bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold text-success fs-5" id="carrito-total-vista">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-dark w-100 text-uppercase fw-medium py-2 btn-iniciar-compra">
+                Iniciar Compra
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/all-products-view.js"></script>
+</body>
+</html>
