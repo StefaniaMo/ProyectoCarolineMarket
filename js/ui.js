@@ -17,12 +17,12 @@ export function actualizarHeaderUsuario(usuarioLogueado, callbackCerrar) {
             <a href="login.html" class="text-secondary text-decoration-none small ms-2">Iniciar sesión</a>
         `;
     } 
-    // 🟢 SI ES UN USUARIO REGISTRADO CON NOMBRE
+    //  SI ES UN USUARIO REGISTRADO CON NOMBRE
     else if (usuarioLogueado) {
         contenedorAuthHeader.innerHTML = `
-            <span class="text-muted small me-2">Hola, <strong class="text-dark">${usuarioLogueado}</strong></span>
-            <span class="text-muted small">|</span>
-            <button id="btn-cerrar-sesion" class="btn btn-link text-danger text-decoration-none small ms-2 p-0 border-0 alignment-baseline" style="font-size: 0.875rem; vertical-align: baseline;">
+            <span class="text-muted me-2">Hola, <strong class="text-dark">${usuarioLogueado}</strong></span>
+            <span class="text-muted">|</span>
+            <button id="btn-cerrar-sesion" class="btn btn-link text-danger text-decoration-none fw-medium ms-2 p-0 border-0 align-baseline" style="font-size: 0.875rem;">
                 Cerrar sesión
             </button>
         `;
@@ -36,12 +36,12 @@ export function actualizarHeaderUsuario(usuarioLogueado, callbackCerrar) {
             });
         }
     } 
-    // 🟢 SI NO HAY NADIE LOGUEADO
+    //  SI NO HAY NADIE LOGUEADO
     else {
         contenedorAuthHeader.innerHTML = `
-            <a href="registro.html" class="text-secondary text-decoration-none small me-2">Crear cuenta</a>
-            <span class="text-muted small">|</span>
-            <a href="login.html" class="text-secondary text-decoration-none small ms-2">Iniciar sesión</a>
+            <a href="registro.html" class="text-secondary text-decoration-none fw-medium me-2">Crear cuenta</a>
+            <span class="text-muted">|</span>
+            <a href="login.html" class="text-secondary text-decoration-none fw-medium ms-2">Iniciar sesión</a>
         `;
     }
 }
@@ -63,7 +63,11 @@ export function mostrarProductosEnTienda(productos, limite = null) {
         columna.innerHTML = `
             <div class="card h-100 border-0 shadow-sm producto-tarjeta">
                 <div class="p-3 d-flex align-items-center justify-content-center bg-light" style="height: 220px;">
-                    <img src="${producto.image}" class="card-img-top img-fluid" alt="${producto.title}" style="max-height: 100%; width: auto; object-fit: contain;">
+                    
+                    <a href="product-detail.html?id=${producto.id}" class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none">
+                        <img src="${producto.image}" class="card-img-top img-fluid" alt="${producto.title}" style="max-height: 100%; width: auto; object-fit: contain;">
+                    </a>
+
                 </div>
                 <div class="card-body d-flex flex-column justify-content-between p-3">
                     <div>
@@ -84,30 +88,33 @@ export function mostrarProductosEnTienda(productos, limite = null) {
     });
 }
 
-// Elementos de la vista del carrito (IDs unificados con tu HTML)
-const contenedorCarritoVista = document.getElementById('carrito-items-vista');
-const totalCarritoVista = document.getElementById('carrito-total-vista');
-const contadorCarritoHeader = document.getElementById('contador-carrito');
+
+
 
 // 2️ ACTUALIZAR INTERFAZ CARRITO
 export function actualizarInterfazCarrito(carrito, totalDinero, totalProductos, callbackRender) {
-    actualizarBotonesTienda(carrito);
+    // Elementos de la vista del carrito 
+    const contenedorCarritoVista = document.getElementById('carrito-items-vista');
+    const totalCarritoVista = document.getElementById('carrito-total-vista');
+    const contadorCarritoHeader = document.getElementById('contador-carrito');
 
+    actualizarBotonesTienda(carrito);
+    // Actualizamos el contador del globito rojo si existe en la página actual
     if (contadorCarritoHeader) {
         contadorCarritoHeader.textContent = totalProductos;
     }
-
+    // Actualizamos el precio total del carrito si existe en la página actual
     if (totalCarritoVista) {
-        totalCarritoVista.textContent = `$${totalDinero.toFixed(2)}`; // 👈 Línea restaurada para mostrar el dinero
+        totalCarritoVista.textContent = `$${totalDinero.toFixed(2)}`; 
     }
-
+    // Si la página actual no tiene el carrito lateral, salimos
     if (!contenedorCarritoVista) return;
-
+    // Si está vacío, mostramos el cartel correspondiente
     if (carrito.length === 0) {
         contenedorCarritoVista.innerHTML = `<p class="text-muted text-center my-4">Tu carrito está vacío.</p>`;
         return; 
     }
-
+    // Limpiamos los productos anteriores antes de redibujar
     contenedorCarritoVista.innerHTML = '';
 
     carrito.forEach(item => {
@@ -115,12 +122,18 @@ export function actualizarInterfazCarrito(carrito, totalDinero, totalProductos, 
         filaMiniatura.classList.add('d-flex', 'align-items-center', 'gap-3', 'mb-3', 'pb-3', 'border-bottom');
         
         filaMiniatura.innerHTML = `
-            <div style="width: 60px; height: 60px;" class="d-flex align-items-center justify-content-center bg-white p-1 border rounded">
-                <img src="${item.imagen}" alt="${item.titulo}" class="img-fluid" style="max-height: 100%; object-fit: contain;">
+            <div style="width: 60px; height: 60px; min-width: 60px;" class="d-flex align-items-center justify-content-center bg-white p-1 border rounded">
+                
+                <a href="product-detail.html?id=${item.id}" class="w-100 h-100 d-flex align-items-center justify-content-center text-decoration-none">
+                    <img src="${item.imagen}" alt="${item.titulo}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </a>
+
             </div>
             
             <div class="flex-grow-1">
-                <h6 class="small mb-1 text-dark text-truncate" style="max-width: 150px;" title="${item.titulo}">${item.titulo}</h6>
+                <h6 class="small mb-1 text-dark text-truncate" style="max-width: 150px;" title="${item.titulo}">
+                    <a href="product-detail.html?id=${item.id}" class="text-dark text-decoration-none fw-medium">${item.titulo}</a>
+                </h6>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="text-muted small">$${Number(item.precio).toFixed(2)} x ${item.cantidad}</span>
                     <span class="fw-bold small text-dark">$${(Number(item.precio) * item.cantidad).toFixed(2)}</span>
@@ -138,7 +151,7 @@ export function actualizarInterfazCarrito(carrito, totalDinero, totalProductos, 
     });
 }
 
-// 3️ ACTUALIZAR BOTONES TIENDA
+//  Actualizar los botones para agregar producto
 export function actualizarBotonesTienda(carrito) {
     const botonesAgregar = document.querySelectorAll('.btn-agregar');
 
@@ -160,4 +173,50 @@ export function actualizarBotonesTienda(carrito) {
             boton.classList.add('btn-dark');
         }
     });
+}
+
+export function mostrarDetalleProducto(producto) {
+    const contenedor = document.getElementById('contenedor-detalle');
+    const breadcrumb = document.getElementById('breadcrumb-actual');
+    if (!contenedor) return;
+
+    if (breadcrumb) {
+        breadcrumb.innerHTML = `
+            <span class="text-lowercase text-muted">${producto.category}</span> 
+            <span class="mx-2 text-secondary">/</span> 
+            <span class="text-dark fw-medium">${producto.title}</span>
+        `;
+    }
+
+    contenedor.innerHTML = `
+        <div class="row g-5 align-items-start pt-3">
+            
+            <div class="col-md-6">
+                <div class="p-4 bg-light rounded d-flex align-items-center justify-content-center" style="min-height: 350px;">
+                    <img src="${producto.image}" alt="${producto.title}" class="img-fluid rounded" style="max-height: 400px; width: auto; object-fit: contain;">
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <p class="text-muted text-uppercase mb-2 small fw-semibold" style="letter-spacing: 1px;">${producto.category}</p>
+                <h1 class="h2 fw-bold text-dark mb-3">${producto.title}</h1>
+                
+                <div class="mb-4">
+                    <span class="fs-3 fw-bold text-dark">$${Number(producto.price).toFixed(2)}</span>
+                </div>
+                
+                <hr class="text-muted my-4">
+                
+                <h5 class="text-secondary fs-6 fw-bold mb-2">Descripción del producto</h5>
+                <p class="text-muted lh-base">${producto.description}</p>
+                
+                <div class="mt-5">
+                    <button class="btn btn-dark btn-lg px-5 w-100 btn-agregar" data-id="${producto.id}">
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    `;
 }

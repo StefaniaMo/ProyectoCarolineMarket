@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Caroline Market</title>
+    <title>Detalle de Producto - Caroline Market</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
-<body class="bg-light d-flex flex-column min-h-100" style="min-height: 100vh;">
+<body>
 
     <header class="bg-white border-bottom shadow-sm sticky-top">
         <div class="bg-light py-1 border-bottom">
@@ -25,17 +25,15 @@
 
             <div class="d-flex align-items-center gap-2">
                 
-                <div class="dropdown position-relative">
+                <div class="dropdown">
                     <button class="btn btn-outline-dark border-0 p-2 rounded-circle" type="button" id="btn-buscar-desplegable" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         <i class="bi bi-search fs-5"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="width: 320px;" aria-labelledby="btn-buscar-desplegable">
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="width: 280px;" aria-labelledby="btn-buscar-desplegable">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-search text-muted"></i></span>
-                            <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto..." autocomplete="off">
+                            <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto...">
                         </div>
-                        <div id="sugerencias-busqueda" class="list-group position-absolute w-100 start-0 shadow-sm mt-1 d-none" style="max-height: 250px; overflow-y: auto; z-index: 1050;">
-            </div>
                     </div>
                 </div>
 
@@ -74,37 +72,35 @@
         </nav>
     </header>
 
-    <main class="container my-5 flex-grow-1">
-        <div class="row mb-4">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb fs-6 mb-0" id="dinamico-breadcrumb"></ol>
-                </nav>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div id="contenedor-productos" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-                    </div>
+    <main class="container my-5">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="text-secondary text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="allProducts.html" class="text-secondary text-decoration-none">Productos</a></li>
+                <li class="breadcrumb-item active text-dark fw-medium" id="breadcrumb-actual" aria-current="page">Cargando...</li>
+            </ol>
+        </nav>
+
+        <div id="contenedor-detalle">
+            <div class="text-center my-5">
+                <div class="spinner-border text-dark" role="status"></div>
             </div>
         </div>
     </main>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoDesplegable" aria-labelledby="carritoDesplegableLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoSidebar" aria-labelledby="carritoSidebarLabel">
         <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold" id="carritoDesplegableLabel">Tu Carrito</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title fw-bold" id="carritoSidebarLabel">Tu Carrito</h5>
+            <button type="button" class="btn-close" data-bs-remove="offcanvas" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column justify-content-between">
             <div id="carrito-items-vista"></div>
-            <div class="border-top pt-3 bg-white">
+            <div class="border-top pt-3 mt-auto">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="fw-medium text-muted">Total estimado:</span>
-                    <span class="fw-bold text-dark fs-5" id="carrito-total-vista">$0.00</span>
+                    <span class="fs-6 text-muted">Total estimado:</span>
+                    <span class="fs-5 fw-bold text-dark" id="carrito-total-vista">$0.00</span>
                 </div>
-                <a href="checkout.html" class="btn btn-dark w-100 text-uppercase fw-medium py-2 btn-iniciar-compra">
-                    Iniciar Compra
-                </a>
+                <a href="checkout.html" class="btn btn-dark w-100 py-2 fw-medium btn-iniciar-compra">Iniciar Compra</a>
             </div>
         </div>
     </div>
@@ -121,11 +117,10 @@
                 <span class="text-muted">|</span>
                 <a href="#" class="text-secondary text-decoration-none">Términos de Servicio</a>
             </div>
-
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/all-products-view.js"></script>
+    <script type="module" src="./js/product-detail.js"></script>
 </body>
 </html>

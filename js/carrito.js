@@ -1,4 +1,3 @@
-
 // 1. Inicializar el carrito leyendo del localStorage. 
 // Si no hay nada guardado todavía, empezamos con un array vacío [].
 let carrito = JSON.parse(localStorage.getItem('carrito_market')) || [];

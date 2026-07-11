@@ -51,4 +51,4 @@ El código está organizado bajo el principio de separación de responsabilidade
     ├── registro.js           # Maneja la lógica del formulario de la vista de registro
     ├── carrito.js            # Lógica matemática y de almacenamiento del carrito
     └── ui.js                 # Manipulación del DOM (renderizar tarjetas, carrito y estados del header)
-└── logo/                     #Imagen del banner central    
+└── logo/                     # Imagen del banner central    
