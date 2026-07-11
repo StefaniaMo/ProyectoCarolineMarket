@@ -2,6 +2,8 @@ import { obtenerProductos } from './api.js';
 import { mostrarProductosEnTienda, actualizarInterfazCarrito, actualizarHeaderUsuario } from './ui.js';
 import { agregarAlCarrito, obtenerCarrito, calcularTotalCarrito, contarProductosCarrito, restarOEliminarDelCarrito } from './carrito.js';
 import { obtenerUsuarioLogueado } from './auth.js';
+import { mostrarSugerenciasBusqueda } from './ui.js';
+
 
 let productosFiltradosPagina = [];
 
@@ -95,6 +97,38 @@ function configurarEventosBotones() {
             }
         });
     }
+}
+
+// Suponiendo que tienes guardados todos los productos en una variable global como 'productosDeLaTienda'
+const inputBusqueda = document.getElementById('busqueda');
+
+if (inputBusqueda) {
+    inputBusqueda.addEventListener('input', (evento) => {
+        const textoUsuario = evento.target.value.trim().toLowerCase();
+
+        // Si el usuario borró todo, ocultamos las sugerencias pasándole un array vacío
+        if (textoUsuario.length < 1) {
+            mostrarSugerenciasBusqueda([]);
+            return;
+        }
+
+        // Filtramos de la lista global los productos que contengan las letras tipeadas en su título
+        // Reemplaza 'productosDeLaTienda' por el nombre real de tu array de productos si se llama diferente
+        const coincidencias = productosFiltradosPagina.filter(producto => 
+            producto.title.toLowerCase().includes(textoUsuario)
+        );
+
+        // Le mandamos las coincidencias encontradas a la UI para que las dibuje (máximo 5 para no saturar)
+        mostrarSugerenciasBusqueda(coincidencias.slice(0, 5));
+    });
+
+    // Oculta la sugerencia si el usuario hace click afuera
+    document.addEventListener('click', (evento) => {
+        if (!inputBusqueda.contains(evento.target)) {
+            const contenedorSugerencias = document.getElementById('sugerencias-busqueda');
+            if (contenedorSugerencias) contenedorSugerencias.classList.add('d-none');
+        }
+    });
 }
 
 // Arrancar la ejecución

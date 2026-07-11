@@ -220,3 +220,36 @@ export function mostrarDetalleProducto(producto) {
         </div>
     `;
 }
+
+export function mostrarSugerenciasBusqueda(productosFiltrados) {
+    const contenedorSugerencias = document.getElementById('sugerencias-busqueda');
+    if (!contenedorSugerencias) return;
+
+    // Si no hay productos que coincidan o la lista viene vacía, ocultamos el cartel
+    if (productosFiltrados.length === 0) {
+        contenedorSugerencias.classList.add('d-none');
+        contenedorSugerencias.innerHTML = '';
+        return;
+    }
+
+    // Mostramos el contenedor y limpiamos el contenido previo
+    contenedorSugerencias.classList.remove('d-none');
+    contenedorSugerencias.innerHTML = '';
+
+    // Aparece un renglon clickeable por cada sugerencia
+    productosFiltrados.forEach(producto => {
+        const item = document.createElement('a');
+        item.href = `product-detail.html?id=${producto.id}`;
+        item.classList.add('list-group-item', 'list-group-item-action', 'd-flex', 'align-items-center', 'gap-2', 'py-2', 'border-0', 'bg-white');
+        
+        item.innerHTML = `
+            <img src="${producto.image}" alt="${producto.title}" style="width: 30px; height: 30px; object-fit: contain;">
+            <div class="flex-grow-1 text-truncate">
+                <span class="small text-dark d-block text-truncate fw-medium">${producto.title}</span>
+                <span class="text-muted" style="font-size: 0.75rem;">$${Number(producto.price).toFixed(2)}</span>
+            </div>
+        `;
+        
+        contenedorSugerencias.appendChild(item);
+    });
+}

@@ -2,6 +2,7 @@ import { obtenerProductos } from './api.js';
 import { mostrarDetalleProducto, actualizarInterfazCarrito, actualizarHeaderUsuario, actualizarBotonesTienda } from './ui.js';
 import { agregarAlCarrito, obtenerCarrito, calcularTotalCarrito, contarProductosCarrito, restarOEliminarDelCarrito } from './carrito.js';
 import { obtenerUsuarioLogueado } from './auth.js';
+import { mostrarSugerenciasBusqueda } from './ui.js';
 
 let productoActual = null;
 let todosLosProductos = [];
@@ -69,6 +70,32 @@ function configurarEventos() {
                 const idProductoEliminar = Number(boton.dataset.id);
                 restarOEliminarDelCarrito(idProductoEliminar);
                 renderizarTodo();
+            }
+        });
+    }
+    // Lógica que busca en detalle
+    const inputBusqueda = document.getElementById('busqueda');
+    if (inputBusqueda) {
+        inputBusqueda.addEventListener('input', (evento) => {
+            const textoUsuario = evento.target.value.trim().toLowerCase();
+
+            if (textoUsuario.length < 1) {
+                mostrarSugerenciasBusqueda([]);
+                return;
+            }
+            // Busca en todos los productos las coincidencias con lo escrito en el input
+            const coincidencias = todosLosProductos.filter(producto => 
+                producto.title.toLowerCase().includes(textoUsuario)
+            );
+
+            mostrarSugerenciasBusqueda(coincidencias.slice(0, 5));
+        });
+
+        // Se oculta la búsqueda si hacen clic afuera
+        document.addEventListener('click', (evento) => {
+            if (!inputBusqueda.contains(evento.target)) {
+                const contenedorSugerencias = document.getElementById('sugerencias-busqueda');
+                if (contenedorSugerencias) contenedorSugerencias.classList.add('d-none');
             }
         });
     }

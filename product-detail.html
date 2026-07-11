@@ -25,15 +25,17 @@
 
             <div class="d-flex align-items-center gap-2">
                 
-                <div class="dropdown">
+                <div class="dropdown position-relative">
                     <button class="btn btn-outline-dark border-0 p-2 rounded-circle" type="button" id="btn-buscar-desplegable" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         <i class="bi bi-search fs-5"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="width: 280px;" aria-labelledby="btn-buscar-desplegable">
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="width: 320px;" aria-labelledby="btn-buscar-desplegable">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-search text-muted"></i></span>
-                            <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto...">
+                            <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto..." autocomplete="off">
                         </div>
+                        <div id="sugerencias-busqueda" class="list-group position-absolute w-100 start-0 shadow-sm mt-1 d-none" style="max-height: 250px; overflow-y: auto; z-index: 1050;">
+            </div>
                     </div>
                 </div>
 
@@ -88,22 +90,21 @@
         </div>
     </main>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoSidebar" aria-labelledby="carritoSidebarLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold" id="carritoSidebarLabel">Tu Carrito</h5>
-            <button type="button" class="btn-close" data-bs-remove="offcanvas" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body d-flex flex-column justify-content-between">
-            <div id="carrito-items-vista"></div>
-            <div class="border-top pt-3 mt-auto">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="fs-6 text-muted">Total estimado:</span>
-                    <span class="fs-5 fw-bold text-dark" id="carrito-total-vista">$0.00</span>
-                </div>
-                <a href="checkout.html" class="btn btn-dark w-100 py-2 fw-medium btn-iniciar-compra">Iniciar Compra</a>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoDesplegable" aria-labelledby="carritoDesplegableLabel">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="carritoDesplegableLabel">Tu Carrito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between">
+        <div id="carrito-items-vista"></div>
+        <div class="border-top pt-3 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-medium text-muted">Total estimado:</span>
+                <span class="fw-bold text-dark fs-5" id="carrito-total-vista">$0.00</span>
             </div>
+            <a href="checkout.html" class="btn btn-dark w-100 text-uppercase fw-medium py-2 btn-iniciar-compra">Iniciar Compra</a>
         </div>
     </div>
+</div>
 
     <footer class="bg-white border-top py-4 mt-auto">
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start gap-3">
