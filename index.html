@@ -13,27 +13,47 @@
     <header class="container-fluid py-2 bg-white">
     
         <div class="d-flex justify-content-between align-items-center py-1">
+            <!-- Botón de registro e inicio de sesion -->
             <div class="header-links" id="contenedor-auth-header">
                 <a href="registro.html" class="text-secondary text-decoration-none small me-2">Crear cuenta</a>
                 <span class="text-muted small">|</span>
                 <a href="login.html" class="text-secondary text-decoration-none small ms-2">Iniciar sesión</a>
             </div>
+            <!-- Botones de búsqueda desplegable, mi perfil y carrito -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- 🌟 BUSCADOR DESPLEGABLE EN UN BOTÓN -->
+                <div class="dropdown position-relative">
+                    <button class="btn btn-outline-dark border-0 p-2 rounded-circle" type="button" id="btn-buscar-desplegable" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" title="Buscar productos">
+                        <i class="bi bi-search fs-5"></i>
+                    </button>
 
-            <div class="d-flex align-items-center gap-3">
-                <!--  Input para buscar producto-->
-                
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-transparent border-end-0" id="buscar-icono">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto..." aria-label="Buscar">
+                    <!-- Menú Flotante con Input y Contenedor de Sugerencias -->
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="width: 320px;" aria-labelledby="btn-buscar-desplegable">
+                        <div class="input-group input-group-sm mb-1">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="bi bi-search text-muted"></i>
+                            </span>
+                            <input type="text" id="busqueda" class="form-control border-start-0 ps-0" placeholder="Buscar producto..." autocomplete="off">
+                        </div>
+
+                        <!-- Contenedor dinámico de sugerencias inyectado desde UI -->
+                        <div id="sugerencias-busqueda" class="list-group position-absolute w-100 start-0 shadow-sm mt-1 d-none" style="max-height: 250px; overflow-y: auto; z-index: 1050;">
+                            <!-- JS inyectará las coincidencias acá -->
+                        </div>
+                    </div>
                 </div>
-                <!-- Botón del carrito-->
-                <button id="btn-carrito" class="btn btn-outline-dark position-relative border-0 p-1" data-bs-toggle="offcanvas" data-bs-target="#carritoDesplegable" aria-controls="carritoDesplegable">
-                    <i class="bi bi-cart3 fs-4"></i>
-                    <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0
-                    </span>
+
+                <!-- Ícono de Perfil / Mi Cuenta -->
+                <a href="#" class="btn btn-outline-dark border-0 p-2 rounded-circle" title="Mi Cuenta">
+                    <i class="bi bi-person fs-4"></i>
+                </a>
+
+                <!-- Ícono del Carrito -->
+                <button id="btn-carrito" class="btn btn-outline-dark position-relative border-0 p-2 rounded-circle" data-bs-toggle="offcanvas" data-bs-target="#carritoDesplegable" aria-controls="carritoDesplegable" title="Ver carrito">
+                    <i class="bi bi-bag fs-4"></i>
+                    <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">0</span>
                 </button>
+
             </div>
         </div>
 

@@ -2,6 +2,7 @@ import { obtenerProductos } from './api.js';
 import { mostrarProductosEnTienda, actualizarInterfazCarrito, actualizarHeaderUsuario } from './ui.js'; 
 import { agregarAlCarrito, obtenerCarrito, calcularTotalCarrito, contarProductosCarrito, restarOEliminarDelCarrito } from './carrito.js';
 import { obtenerUsuarioLogueado, cerrarSesion } from './auth.js'; 
+import { mostrarSugerenciasBusqueda } from './ui.js';
 
 let productosDeLaTienda = [];
 
@@ -70,6 +71,38 @@ function configurarEventosBotones() {
             console.log("¡Todo listo! El cliente avanza al checkout.");
         });
     }
+}
+
+// Función para inicializar o activar el buscador en el inicio
+function activarBuscadorInicio(listaProductos) {
+    const inputBusqueda = document.getElementById('busqueda');
+    if (!inputBusqueda) return;
+
+    inputBusqueda.addEventListener('input', (evento) => {
+        const textoUsuario = evento.target.value.trim().toLowerCase();
+
+        // Si el usuario vacía el input, ocultamos las sugerencias
+        if (textoUsuario.length < 1) {
+            mostrarSugerenciasBusqueda([]);
+            return;
+        }
+
+        // Filtramos sobre la lista completa de productos disponibles
+        const coincidencias = listaProductos.filter(producto =>
+            producto.title.toLowerCase().includes(textoUsuario)
+        );
+
+        // Renderizamos hasta 5 resultados sugeridos
+        mostrarSugerenciasBusqueda(coincidencias.slice(0, 5));
+    });
+
+    // Cierra el menú desplegable si hacen clic fuera del contenedor
+    document.addEventListener('click', (evento) => {
+        if (!inputBusqueda.contains(evento.target)) {
+            const contenedorSugerencias = document.getElementById('sugerencias-busqueda');
+            if (contenedorSugerencias) contenedorSugerencias.classList.add('d-none');
+        }
+    });
 }
 
 iniciarApp();
